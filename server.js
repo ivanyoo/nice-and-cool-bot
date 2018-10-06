@@ -4,6 +4,9 @@ const gis = require('g-i-s');
 const youtubeSearch = require('youtube-search');
 
 
+const IMAGE_BANNED_IDS = ['272120805016469518', '357636864267780099'];
+
+
 client.on('message', msg => {
   if (msg.content === 'idubbbz') {
     msg.reply('n-word')
@@ -40,11 +43,9 @@ client.on('message', msg => {
   }
   
   else if (msg.content.startsWith('imageSearchDaddy')) {
-    if (msg.author.id == '272120805016469518') {
+    if (IMAGE_BANNED_IDS.indexOf(msg.author.id) !== -1) {
       msg.reply('Nice try')
-    } else if (msg.author.id == '357636864267780099') {
-      msg.reply('Nice try')
-    }else {
+    } else {
       const args = msg.content.slice('imageSearchDaddy'.length).trim().split(/ +/g);
       args.forEach((arg) => {
         gis(arg.toLowerCase(), (error, results) => {
