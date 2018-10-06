@@ -43,7 +43,7 @@ client.on('message', msg => {
   }
   
   else if (msg.content.startsWith('imageSearchDaddy')) {
-    if (IMAGE_BANNED_IDS.indexOf(msg.author.id) !== -1) {
+    if (IMAGE_BANNED_IDS.includes(msg.author.id)) {
       msg.reply('Nice try')
     } else {
       const args = msg.content.slice('imageSearchDaddy'.length).trim().split(/ +/g);
