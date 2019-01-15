@@ -2,6 +2,8 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 const gis = require('g-i-s');
 const youtubeSearch = require('youtube-search');
+const axios = require('axios');
+const parser = require('node-html-parser');
 
 
 const IMAGE_BANNED_IDS = ['272120805016469518', '357636864267780099'];
@@ -71,6 +73,14 @@ client.on('message', msg => {
     youtubeSearch(query, opts, (err, results) => {
       if (err) console.log(err);
       msg.channel.send({file: results[0]});
+    });
+  }
+  
+  else if (msg.content === '6before6') {
+    console.log('hey');
+    axios.get('https://ramen.ie/whats-the-6before6/').then(response => {
+      const root = parser.parse(response.data);
+      msg.channel.send(root.querySelector('h2').childNodes[0].rawText);
     });
   }
 })
